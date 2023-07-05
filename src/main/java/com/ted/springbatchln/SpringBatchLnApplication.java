@@ -1,5 +1,6 @@
 package com.ted.springbatchln;
 
+import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
 import org.springframework.batch.core.StepContribution;
 import org.springframework.batch.core.configuration.annotation.EnableBatchProcessing;
@@ -32,6 +33,11 @@ public class SpringBatchLnApplication {
 				return RepeatStatus.FINISHED;
 			}
 		}).build();
+	}
+
+	@Bean
+	public Job deliverPackageJob(){
+		return this.jobBuilderFactory.get("deliverPackageJob").start(packageItemStep()).build();
 	}
 
 	public static void main(String[] args) {
